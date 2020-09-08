@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// いくつかのRoutingの設定をgroup化する
+Route::group(['prefix' => 'admin'], function(){
+   Route::get('new/create', 'Admin\NewsController@add'); 
+});
