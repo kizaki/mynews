@@ -17,5 +17,7 @@ Route::get('/', function () {
 
 // いくつかのRoutingの設定をgroup化する
 Route::group(['prefix' => 'admin'], function(){
-   Route::get('new/create', 'Admin\NewsController@add'); 
+   Route::get('new/create', 'Admin\NewsController@add');
+   Route::get('profile/edit', 'Admin\ProfileController@edit'); // 追記：20200910 木崎
 });
+
