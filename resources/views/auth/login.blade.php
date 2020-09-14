@@ -1,4 +1,3 @@
-<!-- layoutsのadmin.blade.phpを継承する -->
 @extends('layouts.admin')
 
 @section('content')
@@ -9,28 +8,16 @@
                     <div class="login-header card-header mx-auto">{{ __('messages.Login') }}</div>
 
                     <div class="login-body card-body">
-                        <!-- route関数は、URLを生成したりリダイレクトするための関数 -->
-                        <!-- 今回であれば/loginというURLを生成している　-->
                         <form method="POST" action="{{ route('login') }}">
-                            <!-- 認証済みのユーザーがリクエストを送信している確認する -->
-                            <!-- HTMLフォームを定義する場合は、常に、CSRF保護ミドルウェアがリクエスト
-                            を検証できるように、隠しCSRFトークンフィールドをそのフォームに含める必要がある 
-                            トークンを生成するのが@csrfになる -->
                             @csrf
 
                             <div class="form-group row">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('messages.E-Mail Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <!-- 三項演算子を使用。何もなければemailの値はNULLとなる。
-                                    $errorsはバリデーションで返された時に代入されるメッセージが格納されている 
-                                    emailでエラーが起きているとその内容を取得することができる -->
-                                    <!-- oldヘルパ関数は、セッションにフラッシュデータを取得することができる -->
-                                    <!-- 直前のデータがない場合はnullを返す -->
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-                                    <!-- @ifと@endifはPHPのif文を意味する-->
+
                                     @if ($errors->has('email'))
-                                    <!-- エラーがあれメッセージを表示する -->
                                         <span class="invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
