@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 
 // 以下を追記することでProfile Modelが扱えるようになる
 use App\Profile;
+use App\ProfHistory;
+
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -28,6 +31,13 @@ class ProfileController extends Controller
         // データベースに保存する
         $profiles->fill($form);
         $profiles->save();
+        
+        // 以下を追記:20200922
+        $history = new ProfHistory;
+        $history->profile_id = $profiles->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
+        
         return redirect('admin/profile/create');
     }
     public function edit(Request $request)
@@ -35,7 +45,6 @@ class ProfileController extends Controller
         // Profile Modelからデータを取得する
         $profiles = Profile::find($request->id);
         return view('admin.profile.edit', ['profiles_form' => $profiles]);
-        //return view('admin.profile.edit');
     }
     
     public function update(Request $request)
@@ -54,6 +63,13 @@ class ProfileController extends Controller
         // admin/profile/updateにリダイレクトする
         //return redirect('admin/profile/edit');
         //return redirect('/');
+        
+        // 以下を追記:20200922
+        $history = new ProfHistory;
+        $history->profile_id = $profiles->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
+        
         // とりあえずviewを再描画
         return view('admin.profile.edit', ['profiles_form' => $profiles]);
     }
