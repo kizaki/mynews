@@ -11,11 +11,13 @@ use Carbon\Carbon;
 
 class NewsController extends Controller
 {
+    // ニュースを新規投稿する場合
     public function add()
     {
         return view('admin.news.create');
     }
 
+    // ニュースを作成する場合
     public function create(Request $request)
     {
 
@@ -44,6 +46,7 @@ class NewsController extends Controller
         return redirect('admin/news/create');
     }
 
+    // 投稿したニュースを検索するための機能
     public function index(Request $request)
     {
         $cond_title = $request->cond_title;
