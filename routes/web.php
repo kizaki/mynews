@@ -13,6 +13,9 @@
 
 Route::get('/', 'NewsController@index');
 
+// 20200926追加
+Route::get('/profile', 'ProfileController@index');
+
 // いくつかのRoutingの設定をgroup化する
 Route::group(['prefix' => 'admin'], function () {
     // ニュース投稿画面に関するルーティング
